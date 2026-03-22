@@ -316,14 +316,37 @@ document.addEventListener("mousemove", e => {
         b.style.top  = Math.random()*window.innerHeight + "px"
     }
 })
+// Single sound every 30 seconds – but only AFTER user interacts once
+let audioUnlocked = false;
+
+function unlockAudio() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+
+    // Optional: play a silent/very short sound to "warm up" audio context (helps on iOS/Safari too)
+    const silent = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=");
+    silent.play().catch(() => {});
+
+    console.log("Audio unlocked – sounds can play now");
+}
+
+['click', 'touchstart', 'keydown', 'scroll'].forEach(event => {
+    document.addEventListener(event, unlockAudio, { once: true });
+});
+
 setInterval(() => {
-    const audio = new Audio("faaah.mp3"); 
+    if (!audioUnlocked) return; 
+
+    const audio = new Audio("faaah.mp3");
     audio.volume = 0.4;
-    
+
     audio.play()
-        .catch(err => {
-            console.log("Autoplay was prevented:", err);
-        });
+        .then(() => console.log("faaah played!"))
+        .catch(err => console.log("Play failed (shouldn't happen after unlock):", err));
+
+    document.body.classList.add("shake");
+    setTimeout(() => document.body.classList.remove("shake"), 300);
+}, 30000);
 
     document.body.classList.add("shake");
     setTimeout(() => {
