@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Glitch the Internet</title>
+<style>
+body {
+    margin: 0;
+    background: #050505;
+    color: #e6faff;
+    font-family: monospace;
+    overflow-x: hidden;
+    font-size: 20px;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    text-align: center;
+    padding: 12px;
+    background: #000c;
+    backdrop-filter: blur(6px);
+    z-index: 999;
+}
+
+nav a {
+    color: #0ff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+h1, h2 {
+    font-size: 48px;
+    color: #0ff;
+    position: relative;
+}
+
+h1::before, h1::after, h2::before, h2::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    width: 100%;
+    opacity: .5;
+}
+
+h1::before, h2::before { color: #f0f; animation: g1 1s infinite; }
+h1::after, h2::after  { color: #0ff; animation: g2 1s infinite; }
+
+@keyframes g1 { 50% { transform: translate(-3px, 3px) } }
+@keyframes g2 { 50% { transform: translate(3px, -3px) } }
+
+p, li {
+    max-width: 900px;
+    line-height: 1.8;
+}
+
+ul {
+    text-align: left;
+    margin: 0.4em 0 1.2em 1.8em;
+    padding-left: 0;
+}
+
+.btn {
+    position: absolute;
+    padding: 12px 25px;
+    border: 1px solid #0ff;
+    background: none;
+    color: #0ff;
+    cursor: pointer;
+}
+
+/* ──────────────────────────────────────── */
+/*     We Ship ─ stages as cards/boxes      */
+/* ──────────────────────────────────────── */
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.stage {
+    background: rgba(0, 255, 255, 0.04);
+    border: 1px solid rgba(0, 255, 255, 0.18);
+    border-radius: 12px;
+    padding: 24px 28px;
+    width: 100%;
+    max-width: 420px;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.06);
+    transition: all 0.25s ease;
+}
+
+.stage:hover {
+    border-color: #0ff;
+    box-shadow: 0 8px 30px rgba(0, 255, 255, 0.12);
+    transform: translateY(-4px);
+}
+
+.stage b {
+    font-size: 1.25em;
+    color: #0ff;
+    display: block;
+    margin-bottom: 0.9em;
+}
+
+.stage p {
+    margin: 0.6em 0;
+}
+
+.stage ul {
+    margin: 0.5em 0 1em 1.6em;
+}
+
+/* small visual flair for levels */
+.stage:nth-child(1) { border-top: 4px solid #22ff22; }
+.stage:nth-child(2) { border-top: 4px solid #3399ff; }
+.stage:nth-child(3) { border-top: 4px solid #aa44ff; }
+.stage:nth-child(4) { border-top: 4px solid #ffdd22; }
+.stage:nth-child(5) { border-top: 4px solid #ff2244; }
+
+.fly {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #0ff;
+    opacity: .5;
+    animation: f linear infinite;
+}
+
+@keyframes f {
+    from { transform: translateY(0) }
+    to   { transform: translateY(-120vh) }
+}
+
+.shake {
+    animation: shake .3s;
+}
+
+@keyframes shake {
+    0%   { transform: translate(0) }
+   25%   { transform: translate(5px, -5px) }
+   50%   { transform: translate(-5px, 5px) }
+   75%   { transform: translate(5px, 5px) }
+  100%   { transform: translate(0) }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#ship">You Ship</a>
+    <a href="#ws">We Ship</a>
+    <a href="#faq">FAQ</a>
+    <a href="#learn">Learn</a>
+</nav>
+
+<section id="home">
+    <h1 data-text="🚀 Glitch the Internet">🚀 Glitch the Internet</h1>
+
+    <p>Build a live website that intentionally breaks reality in the browser.</p>
+
+    <p>Your site must include:</p>
+    <ul>
+        <li>At least one intentional glitch (visual, interaction, or logic)</li>
+        <li>Be fully deployed and accessible online</li>
+        <li>Create a weird, surprising, or confusing experience</li>
+    </ul>
+
+    <p>Examples of glitches:</p>
+    <ul>
+        <li>Broken layouts / shifting UI</li>
+        <li>Fake system errors or terminals</li>
+        <li>Infinite loops / trapped interactions</li>
+        <li>Sound-based chaos</li>
+        <li>“Hacking” illusions</li>
+        <li>Anything that makes the user say: “what just happened?”</li>
+    </ul>
+
+    <button class="btn" id="b">RSVP</button>
+</section>
+
+<section id="ws">
+    <h2 data-text="📦 We Ship">📦 We Ship</h2>
+
+    <p>The more you glitch the web, the more you unlock.</p>
+
+    <div class="grid">
+
+        <div class="stage">
+            <b>🟢 1–2 Hours — “First Glitch”</b>
+            <p><strong>Requirement:</strong></p>
+            <ul>
+                <li>Simple website with at least 1 intentional glitch</li>
+            </ul>
+            <p><strong>Reward:</strong></p>
+            <ul>
+                <li>Glitch Sticker Pack (physical)</li>
+            </ul>
+        </div>
+
+        <div class="stage">
+            <b>🔵 3–5 Hours — “UI Breaker”</b>
+            <p><strong>Requirement:</strong></p>
+            <ul>
+                <li>At least 3 visible UI glitches</li>
+            </ul>
+            <p><strong>Reward:</strong></p>
+            <ul>
+                <li>$15 Grant toward a glitch-themed keyboard / setup</li>
+            </ul>
+        </div>
+
+        <div class="stage">
+            <b>🟣 6–8 Hours — “Interaction Corruptor”</b>
+            <p><strong>Requirement:</strong></p>
+            <ul>
+                <li>Interactive glitches (user triggers something weird)</li>
+            </ul>
+            <p><strong>Reward:</strong></p>
+            <ul>
+                <li>$20 Domain Grant</li>
+            </ul>
+        </div>
+
+        <div class="stage">
+            <b>🟡 9–15 Hours — “Reality Distorter”</b>
+            <p><strong>Requirement:</strong></p>
+            <ul>
+                <li>Full experience:</li>
+                <li>sound effects</li>
+                <li>fake hacking / prank elements</li>
+                <li>immersive glitch behavior</li>
+            </ul>
+            <p><strong>Reward:</strong></p>
+            <ul>
+                <li>🎁 Mini Glitch Box</li>
+                <li>Glitch-themed merch</li>
+                <li>Weird “corrupted” CD (memes, mini games, strange files 👀)</li>
+                <li>🎟️ 50 Tickets (Hack Club shop credits)</li>
+            </ul>
+        </div>
+
+        <div class="stage">
+            <b>🔴 30+ Hours — “Elite Glitchers”</b>
+            <p><strong>Requirement:</strong></p>
+            <ul>
+                <li>One of the Top 5 most creative + chaotic projects</li>
+            </ul>
+            <p><strong>Reward:</strong></p>
+            <ul>
+                <li>✈️ Invitation to “Steve” (house near Hack Club HQ)</li>
+                <li>🏠 3-day experience:</li>
+                <li>Visit Hack Club HQ</li>
+                <li>Meet other hackers</li>
+                <li>💸 Travel & food stipends (~$8/hour capped budget)</li>
+            </ul>
+
+            <p><strong>Alternative:</strong></p>
+            <ul>
+                <li>If you can’t travel → receive 150 Tickets instead</li>
+                <li>Your spot goes to the next top builder</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- rest of sections unchanged -->
+
+<section id="faq">
+    <h2 data-text="FAQ">FAQ</h2>
+    <p><b>Who can join?</b><br>Glitched 13–18 teenagers</p>
+    <p><b>Do I need experience?</b><br>No, just break things</p>
+    <p><b>Is this safe?</b><br>Yes, controlled chaos only</p>
+    <p><b>Do I need to deploy?</b><br>Yes, must be live</p>
+    <p><b>Can I work in a team?</b><br>Solo preferred</p>
+    <p><b>What counts as a glitch?</b><br>Anything weird but intentional</p>
+</section>
+
+<section id="learn">
+    <h2 data-text="What Will You Learn">What Will You Learn</h2>
+    <p>Students will learn Advanced Frontend Engineering + Creative Coding.</p>
+    <ul>
+        <li>Deep DOM Manipulation (dynamic changes, runtime control)</li>
+        <li>Creative Coding (turn ideas into interactive experiences)</li>
+        <li>Advanced JavaScript (async, loops, user flow)</li>
+        <li>Browser Rendering (reflow, repaint, breaking expectations)</li>
+        <li>UX Psychology (confusion, surprise, tension)</li>
+        <li>Interactive Systems Design (game mechanics, triggers)</li>
+        <li>Debugging Chaos (control glitches, bug vs feature)</li>
+        <li>Shipping Real Projects (hosting, domains, performance)</li>
+    </ul>
+    <p>Participants will learn how to turn the web into a creative medium—combining JavaScript engineering, browser internals, and experimental design to build interactive experiences that challenge how users perceive reality online.</p>
+</section>
+
+<script>
+// your existing script remains unchanged
+let b = document.getElementById("b")
+
+document.addEventListener("mousemove", e => {
+    let r = b.getBoundingClientRect()
+    if (e.clientX > r.left-80 && e.clientX < r.right+80 &&
+        e.clientY > r.top-50  && e.clientY < r.bottom+50) {
+        b.style.left = Math.random()*window.innerWidth + "px"
+        b.style.top  = Math.random()*window.innerHeight + "px"
+    }
+})
+setInterval(() => {
+    const audio = new Audio("sounds/faaah.mp3");   // ← fixed: quotes added
+    audio.volume = 0.4;
+    
+    audio.play()
+        .catch(err => {
+            console.log("Autoplay was prevented:", err);
+            // Most common reason: "The play() request was interrupted..." or "user gesture required"
+        });
+
+    document.body.classList.add("shake");
+    setTimeout(() => {
+        document.body.classList.remove("shake");
+    }, 300);   // ← much more visible shake (0.3 seconds)
+}, 9000);     // ← 30 seconds = what you originally wanted
+
+for(let i = 0; i < 120; i++) {
+    let d = document.createElement("div")
+    d.className = "fly"
+    d.style.left = Math.random()*100 + "vw"
+    d.style.top  = Math.random()*100 + "vh"
+    d.style.animationDuration = (5 + Math.random()*10) + "s"
+    d.style.background = Math.random() > 0.5 ? "#0ff" : "#f0f"
+    document.body.appendChild(d)
+}
+</script>
+
+</body>
+</html>
