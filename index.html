@@ -304,8 +304,8 @@ ul {
     </ul>
     <p>Participants will learn how to turn the web into a creative medium—combining JavaScript engineering, browser internals, and experimental design to build interactive experiences that challenge how users perceive reality online.</p>
 </section>
-
 <script>
+// Mouse avoid button
 let b = document.getElementById("b")
 
 document.addEventListener("mousemove", e => {
@@ -316,17 +316,13 @@ document.addEventListener("mousemove", e => {
         b.style.top  = Math.random()*window.innerHeight + "px"
     }
 })
-// Single sound every 30 seconds – but only AFTER user interacts once
+
+// Audio unlock + periodic sound (with interaction check)
 let audioUnlocked = false;
 
 function unlockAudio() {
     if (audioUnlocked) return;
     audioUnlocked = true;
-
-    // Optional: play a silent/very short sound to "warm up" audio context (helps on iOS/Safari too)
-    const silent = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=");
-    silent.play().catch(() => {});
-
     console.log("Audio unlocked – sounds can play now");
 }
 
@@ -335,25 +331,20 @@ function unlockAudio() {
 });
 
 setInterval(() => {
-    if (!audioUnlocked) return; 
+    if (!audioUnlocked) return;
 
     const audio = new Audio("faaah.mp3");
     audio.volume = 0.4;
 
     audio.play()
         .then(() => console.log("faaah played!"))
-        .catch(err => console.log("Play failed (shouldn't happen after unlock):", err));
+        .catch(err => console.log("Play failed:", err));
 
     document.body.classList.add("shake");
     setTimeout(() => document.body.classList.remove("shake"), 300);
 }, 30000);
 
-    document.body.classList.add("shake");
-    setTimeout(() => {
-        document.body.classList.remove("shake");
-    }, 300);   
-}, 9000);    
-
+// Flying particles
 for(let i = 0; i < 120; i++) {
     let d = document.createElement("div")
     d.className = "fly"
