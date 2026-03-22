@@ -80,10 +80,6 @@ ul {
     cursor: pointer;
 }
 
-/* ──────────────────────────────────────── */
-/*     We Ship ─ stages as cards/boxes      */
-/* ──────────────────────────────────────── */
-
 .grid {
     display: flex;
     flex-wrap: wrap;
@@ -283,8 +279,6 @@ ul {
     </div>
 </section>
 
-<!-- rest of sections unchanged -->
-
 <section id="faq">
     <h2 data-text="FAQ">FAQ</h2>
     <p><b>Who can join?</b><br>Glitched 13–18 teenagers</p>
@@ -312,7 +306,6 @@ ul {
 </section>
 
 <script>
-// your existing script remains unchanged
 let b = document.getElementById("b")
 
 document.addEventListener("mousemove", e => {
@@ -324,20 +317,19 @@ document.addEventListener("mousemove", e => {
     }
 })
 setInterval(() => {
-    const audio = new Audio("sounds/faaah.mp3");   // ← fixed: quotes added
+    const audio = new Audio("faaah.mp3"); 
     audio.volume = 0.4;
     
     audio.play()
         .catch(err => {
             console.log("Autoplay was prevented:", err);
-            // Most common reason: "The play() request was interrupted..." or "user gesture required"
         });
 
     document.body.classList.add("shake");
     setTimeout(() => {
         document.body.classList.remove("shake");
-    }, 300);   // ← much more visible shake (0.3 seconds)
-}, 9000);     // ← 30 seconds = what you originally wanted
+    }, 300);   
+}, 9000);    
 
 for(let i = 0; i < 120; i++) {
     let d = document.createElement("div")
